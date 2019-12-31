@@ -8,7 +8,6 @@ class User extends Model {
       email: Sequelize.STRING,
       password: Sequelize.VIRTUAL, // VIRTUAL valor que ñ será guardado na DB
       password_hash: Sequelize.STRING,
-      provider: Sequelize.BOOLEAN,
     },
     {
       sequelize,
