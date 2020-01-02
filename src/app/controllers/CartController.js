@@ -3,6 +3,33 @@ import Cart from '../models/Cart';
 import User from '../models/User';
 
 class CartController {
+  // função que retorna todas as lista de compras de um determinado utilizador
+  async index(req, res) {
+    /* pegar o id do utilizador no parametro da requisição */
+    const { user_id } = req.params;
+    console.log(user_id);
+
+    /* verificar se o utilizador existe */
+    const userExist = await User.findByPk(user_id);
+
+    /* caso não existir retornar erro */
+    if (!userExist) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const carts = await Cart.findAll({
+      where: {
+        user_id,
+      },
+    });
+
+    /* const users = await User.findByPk(user_id, {
+      include: { association: 'carts' },
+    }); */
+
+    return res.json(carts);
+  }
+
   // função que recebe os dados da requisição e faz a criação da lista para o carrinho de compra
   async store(req, res) {
     // schema dos dados da requisição utilizando o Yup
@@ -14,7 +41,7 @@ class CartController {
 
     // verificar se o schema está valido
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(404).json({ error: 'Validation fails' });
     }
 
     // pegar o id do utilizador no parametro da requisição e o nome no body

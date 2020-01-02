@@ -30,6 +30,7 @@ routes.put('/users', UserController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
+routes.get('/users/:user_id/carts', CartController.index);
 routes.post('/users/:user_id/carts', CartController.store);
 
 
