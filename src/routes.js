@@ -8,6 +8,7 @@ import multerConfig from './config/multer';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
+import CartController from './app/controllers/CartController';
 // import do middleware da autenticação
 import authMiddleware from './app/middleware/auth';
 // instancia da classe Router
@@ -28,6 +29,8 @@ routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 
 routes.post('/files', upload.single('file'), FileController.store);
+
+routes.post('/users/:user_id/carts', CartController.store);
 
 
 // export do routes

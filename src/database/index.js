@@ -2,11 +2,12 @@ import Sequelize from 'sequelize';
 
 import User from '../app/models/User';
 import File from '../app/models/File';
+import Cart from '../app/models/Cart';
 
 import databaseConfig from '../config/database';
 
 /* array com todos os models */
-const models = [User, File];
+const models = [User, File, Cart];
 
 class Database {
   constructor() {
@@ -16,7 +17,7 @@ class Database {
   init() {
     this.connection = new Sequelize(databaseConfig);
 
-    /* percorrer o array dos models e envia a conexao para cada modelo */
+    /* percorrer o array dos models e enviar a conexao para cada modelo */
     models
       .map((model) => model.init(this.connection))
       /* percorrer o array dos models e chamar o metodo associate caso existir */
