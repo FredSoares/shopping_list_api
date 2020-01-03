@@ -22,7 +22,7 @@ class CartController {
 
     const { cart_id } = req.body;
 
-    // verificar se o exist alguma lista como o id recebido
+    // verificar se o exist alguma cart como o id recebido
     const cart = await Cart.findByPk(cart_id);
 
     // caso não existir retorna erro
@@ -36,6 +36,22 @@ class CartController {
     return res.json({
       product,
     });
+  }
+
+  // função que apaga productos
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const deleted = await Product.destroy({
+      where: {
+        id,
+      },
+    });
+
+    if (!deleted) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    return res.status(200).json({ message: 'Product was deleted' });
   }
 }
 

@@ -36,6 +36,7 @@ routes.post('/users/:user_id/carts', CartController.store);
 routes.delete('/users/:user_id/carts/:id', CartController.delete);
 
 routes.post('/products', ProductController.store);
+routes.delete('/products/:id', ProductController.delete);
 
 // export do routes
 export default routes;

@@ -21,11 +21,8 @@ class CartController {
       where: {
         user_id,
       },
+      include: { association: 'products' },
     });
-
-    /* const users = await User.findByPk(user_id, {
-      include: { association: 'carts' },
-    }); */
 
     return res.json(carts);
   }
