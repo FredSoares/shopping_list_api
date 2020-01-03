@@ -32,7 +32,7 @@ class User extends Model {
   static associate(models) {
     /* Cria uma associação entre this (a fonte) e o destino fornecido.
      * A chave estrangeira é adicionada na fonte. */
-    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
+    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
 
     this.hasMany(models.Cart, { foreignKey: 'user_id', as: 'carts' });
   }

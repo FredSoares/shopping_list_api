@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import User from '../models/User';
+import File from '../models/File';
 
 class UserController {
   // função que recebe os dados da requisição e faz a criação do utilizador na DB
@@ -81,14 +82,23 @@ class UserController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    // atualizar e pegar id, name e provider
-    const { id, name, provider } = await user.update(req.body);
+    // atualizar o utilizador
+    await user.update(req.body);
+    const { id, name, avatar } = await User.findByPk(req.userId, {
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
 
     return res.json({
       id,
       name,
       email,
-      provider,
+      avatar,
     });
   }
 }
