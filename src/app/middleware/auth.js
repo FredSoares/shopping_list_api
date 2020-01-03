@@ -17,7 +17,6 @@ export default async (req, res, next) => {
   /* pegar o token utilizando a desestrututazação porque
   o array está no seguinte formato Array [Bearer, token] */
   const [, token] = authHeader.split(' ');
-  console.log(token);
   try {
     const decoded = await promisify(jwt.verify)(token, authConfig.secret);
 

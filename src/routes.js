@@ -9,6 +9,7 @@ import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import CartController from './app/controllers/CartController';
+import ProductController from './app/controllers/ProductController';
 // import do middleware da autenticação
 import authMiddleware from './app/middleware/auth';
 // instancia da classe Router
@@ -32,7 +33,9 @@ routes.post('/files', upload.single('file'), FileController.store);
 
 routes.get('/users/:user_id/carts', CartController.index);
 routes.post('/users/:user_id/carts', CartController.store);
+routes.delete('/users/:user_id/carts/:id', CartController.delete);
 
+routes.post('/products', ProductController.store);
 
 // export do routes
 export default routes;

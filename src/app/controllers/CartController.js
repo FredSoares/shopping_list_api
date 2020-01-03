@@ -64,6 +64,21 @@ class CartController {
       cart,
     });
   }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const deleted = await Cart.destroy({
+      where: {
+        id,
+      },
+    });
+
+    if (!deleted) {
+      return res.status(404).json({ error: 'Card not found' });
+    }
+    return res.status(200).json({ message: 'Card was deleted' });
+  }
 }
 
 export default new CartController();

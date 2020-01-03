@@ -1,9 +1,11 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Cart extends Model {
+class Product extends Model {
   static init(sequelize) {
     super.init({
       name: Sequelize.STRING,
+      description: Sequelize.STRING,
+      quantity: Sequelize.STRING,
     },
     {
       sequelize,
@@ -16,10 +18,8 @@ class Cart extends Model {
   static associate(models) {
     /* Cria uma associação entre this (a fonte) e o destino fornecido.
      * A chave estrangeira é adicionada na fonte. */
-    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
-
-    this.hasMany(models.Product, { foreignKey: 'cart_id', as: 'products' });
+    this.belongsTo(models.Cart, { foreignKey: 'cart_id', as: 'cart' });
   }
 }
 
-export default Cart;
+export default Product;
