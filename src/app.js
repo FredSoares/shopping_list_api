@@ -1,6 +1,8 @@
 import 'dotenv/config';
 
 import express from 'express';
+import cors from 'cors';
+
 import routes from './routes';
 
 import './database';
@@ -16,6 +18,8 @@ class App {
   }
 
   middleware() {
+    // permite controlar quais aplicações irão acessar a api
+    this.server.use(cors());
     // config para receber requisicoes no formato JSON
     this.server.use(express.json());
   }
