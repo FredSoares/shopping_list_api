@@ -29,7 +29,6 @@ routes.use(authMiddleware);
 // rota para atualizar um utilizador
 routes.put('/users', UserController.update);
 
-routes.post('/files', upload.single('file'), FileController.store);
 
 routes.get('/users/:user_id/carts', CartController.index);
 routes.post('/users/:user_id/carts', CartController.store);
@@ -38,5 +37,6 @@ routes.delete('/users/:user_id/carts/:id', CartController.delete);
 routes.post('/products', ProductController.store);
 routes.delete('/products/:id', ProductController.delete);
 
+routes.post('/files', upload.single('file'), FileController.store);
 // export do routes
 export default routes;
